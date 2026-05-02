@@ -1,0 +1,16 @@
+node_modules/
+
+# Runtime logs
+*.log
+npm-debug.log*
+
+# Environment/local secrets
+.env
+.env.*
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+
+# Local extracted assessment artifacts
+tmp_pdf_extract/
