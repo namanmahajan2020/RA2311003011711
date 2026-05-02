@@ -1,6 +1,6 @@
 # Vehicle Maintenance Scheduler Microservice
 
-## 📌 Overview
+## Overview
 
 This project is developed as part of a backend evaluation. It focuses on building a **Vehicle Maintenance Scheduler** that efficiently assigns maintenance tasks to depots while maximizing operational impact within limited resources.
 
@@ -8,60 +8,78 @@ The system also includes a **Logging Middleware** which is integrated across all
 
 ---
 
-## ⚙️ Tech Stack
+## Tech Stack
 
 * Node.js
 * Express.js
 * REST APIs
+* Axios (for API calls)
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
-```
+```text
 RA2311003011711/
-│── logging_middleware/
-│── vehicle_maintenance_scheduler/
-│── package.json
-│── .gitignore
+|-- logging_middleware/
+|-- vehicle_maintenance_scheduler/
+|-- package.json
+|-- .gitignore
 ```
 
 ---
 
-## 🚨 Mandatory Logging Middleware
+## Mandatory Logging Middleware
 
-A reusable logging middleware is implemented and integrated across all functions.
+A centralized logging middleware is implemented and used across all modules.
 
-### 🔹 Log Function
+All logs are sent to:
 
-```
-Log(stack, level, package, message)
-```
-
-### 🔹 Logging API
-
-```
+```text
 POST /evaluation-service/logs
 ```
 
-### 🔹 Example Usage
+Each log includes:
 
+- `stack`: `backend`
+- `level`: `info | error | debug | fatal`
+- `package`: `service | controller | handler`
+- `message`: description
+
+Example:
+
+```js
+Log("backend", "info", "service", "Fetched depots", token)
 ```
-Log("backend", "error", "handler", "received string, expected bool")
-Log("backend", "fatal", "db", "critical database connection failure")
-```
 
-Logging is triggered:
+Logging is used for:
 
-* On API calls
-* On errors
-* On important operations
+- API calls
+- Authentication
+- Processing each depot
+- Error handling
 
 ---
 
-## 🚗 Vehicle Maintenance Scheduler
+## Authentication
 
-### 📌 Problem
+The system uses an authentication API to obtain an access token.
+
+```text
+POST /evaluation-service/auth
+```
+
+The token is then used in all API requests and logging middleware.
+
+```text
+Authorization: Bearer <token>
+```
+
+---
+
+## Vehicle Maintenance Scheduler
+
+### Problem
 
 Each vehicle task has:
 
@@ -72,28 +90,28 @@ Each depot has:
 
 * Limited mechanic hours
 
-### 🎯 Objective
+### Objective
 
 Select a subset of vehicles such that:
 
-* Total duration ≤ available hours
+* Total duration <= available hours
 * Total impact is maximized
 
-👉 This is solved using an **optimization approach (similar to Knapsack Problem)**.
+This is solved using an optimization approach similar to the Knapsack Problem.
 
 ---
 
-## 🔗 APIs Used
+## APIs Used
 
 ### 1. Depot API
 
-```
+```text
 GET /evaluation-service/depots
 ```
 
 Returns:
 
-```
+```json
 {
   "depots": [
     { "id": 1, "mechanicHours": 60 }
@@ -105,13 +123,13 @@ Returns:
 
 ### 2. Vehicles API
 
-```
+```text
 GET /evaluation-service/vehicles
 ```
 
 Returns:
 
-```
+```json
 {
   "vehicles": [
     {
@@ -125,22 +143,22 @@ Returns:
 
 ---
 
-## 🧠 Approach
+## Approach
 
 1. Fetch depots data
 2. Fetch vehicles data
 3. For each depot:
-
    * Apply optimization logic
    * Select best combination of tasks
 4. Ensure:
-
    * Total duration does not exceed limit
    * Maximum impact is achieved
 
+The optimization is implemented using dynamic programming with time complexity `O(n x capacity)`.
+
 ---
 
-## 📊 Output
+## Output
 
 The system generates:
 
@@ -150,16 +168,16 @@ The system generates:
 
 ---
 
-## ▶️ How to Run
+## How to Run
 
-```
+```text
 npm install
-npm start
+node vehicle_maintenance_scheduler/index.js
 ```
 
 ---
 
-## 📌 Important Notes
+## Important Notes
 
 * Logging middleware is integrated from the first function
 * No hardcoded data is used
@@ -168,16 +186,16 @@ npm start
 
 ---
 
-## 📎 Evaluation Compliance
+## Evaluation Compliance
 
-✔ Logging Middleware implemented and integrated
-✔ Backend APIs used correctly
-✔ Optimization logic implemented
-✔ Clean project structure
-✔ Proper Git commits
+* Logging Middleware implemented and integrated
+* Backend APIs used correctly
+* Optimization logic implemented
+* Clean project structure
+* Proper Git commits
 
 ---
 
-## 👨‍💻 Author
+## Conclusion
 
-Naman Mahajan
+The system efficiently schedules vehicle maintenance tasks using an optimized approach while maintaining scalability, reliability, and proper logging for monitoring.
