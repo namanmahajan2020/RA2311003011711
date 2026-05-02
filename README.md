@@ -168,6 +168,34 @@ The system generates:
 
 ---
 
+## Screenshots
+
+### Authentication API
+
+![Authentication API](screenshot/api.png)
+
+### Depots API
+
+![Depots API](screenshot/api_depots.png)
+
+### Logging Output 1
+
+![Logging Output 1](screenshot/logs1.png)
+
+### Logging Output 2
+
+![Logging Output 2](screenshot/logs2.png)
+
+### Program Output 1
+
+![Program Output 1](screenshot/output1.png)
+
+### Program Output 2
+
+![Program Output 2](screenshot/output2.png)
+
+---
+
 ## How to Run
 
 ```text
