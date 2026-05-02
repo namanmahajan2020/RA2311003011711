@@ -1,16 +1,63 @@
+# =========================
+# Node modules
+# =========================
 node_modules/
 
-# Runtime logs
+# =========================
+# Logs
+# =========================
+logs/
 *.log
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# Environment/local secrets
+# =========================
+# Runtime data
+# =========================
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# =========================
+# Environment files (IMPORTANT)
+# =========================
 .env
 .env.*
 
-# OS/editor noise
+# =========================
+# OS files
+# =========================
 .DS_Store
 Thumbs.db
 
-# Local extracted assessment artifacts
+# =========================
+# VS Code settings
+# =========================
+.vscode/
+
+# =========================
+# Temporary files
+# =========================
+temp*
+*.tmp
 tmp_pdf_extract/
+
+# =========================
+# Build / cache
+# =========================
+dist/
+build/
+.cache/
+
+# =========================
+# Coverage
+# =========================
+coverage/
+
+# =========================
+# Optional (uncomment if needed)
+# =========================
+# package-lock.json
+# yarn.lock
