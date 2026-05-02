@@ -40,6 +40,8 @@ async function Log(stack, level, packageName, message, token) {
     message,
   };
 
+  console.log(`[${level.toUpperCase()}] ${message}`);
+
   try {
     const response = await axios.post(
       LOG_API_URL,
