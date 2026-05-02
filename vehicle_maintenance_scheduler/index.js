@@ -39,6 +39,10 @@ async function authenticateUser(clientID, clientSecret) {
     throw new Error("No access token received");
   }
 
+  if (token) {
+    await Log("backend", "info", "service", "Auth success", token);
+  }
+
   return token;
 }
 
@@ -79,7 +83,27 @@ async function main() {
       getVehicleData(token),
     ]);
 
+    if (token) {
+      await Log(
+        "backend",
+        "info",
+        "service",
+        `Fetched ${depots.length} depots and ${vehicles.length} vehicles`,
+        token
+      );
+    }
+
     for (const depot of depots) {
+      if (token) {
+        await Log(
+          "backend",
+          "info",
+          "service",
+          `Processing depot ${depot.ID}`,
+          token
+        );
+      }
+
       const result = await solveMaintenanceKnapsack(
         vehicles,
         Number(depot.MechanicHours),
@@ -94,6 +118,10 @@ async function main() {
     }
   } catch (err) {
     const msg = err.response?.data?.message || err.message;
+
+    if (token) {
+      await Log("backend", "fatal", "service", msg, token);
+    }
 
     console.error("ERROR:", msg);
     process.exitCode = 1;
